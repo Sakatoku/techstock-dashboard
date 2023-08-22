@@ -1,10 +1,10 @@
 [
     {
-        "name": "AWS-CLF",
+        "name": "CLF",
         "amount": 78
     },
     {
-        "name": "AWS-SAA",
+        "name": "SAA",
         "amount": 170
     }
 ]

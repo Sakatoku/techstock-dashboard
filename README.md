@@ -18,9 +18,9 @@ pip install streamlit
 - ヘッダ: あり
 - 文字コード: UTF-8
 
-| name | sequence | date |
-| --- | --- | --- |
-| 資格試験名 | 問題番号 | 実施日 |
+| name | sequence | correct | incorrect | date |
+| --- | --- | --- | --- | --- |
+| 資格試験名 | 問題番号 | 正解数 | 不正解数 | 実施日 |
 
 ```data/info.json```に問題集の情報を記載する。  
 
