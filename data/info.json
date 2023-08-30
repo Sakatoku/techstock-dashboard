@@ -6,5 +6,9 @@
     {
         "name": "SAA",
         "amount": 170
+    },
+    {
+        "name": "SOA",
+        "amount": 100
     }
 ]

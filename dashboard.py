@@ -23,6 +23,8 @@ df.date = pd.to_datetime(df['date'], format='%Y-%m-%d')
 
 # nameとdateでグループ化して、countで集計
 df = df.groupby(['name', 'date'], as_index=False).count()
+# nameのリストを抽出
+names_in_result = df.name.unique().tolist()
 
 # データをピボットする
 df = df.pivot(index='date', columns='name', values='sequence')
@@ -31,19 +33,27 @@ df = df.reset_index()
 df = df.fillna(0)
 
 # 問題集の情報に記載されているnameのリストを作成
-name_list = [info[i]['name'] for i in range(len(info))]
+names_in_info = [info[i]['name'] for i in range(len(info))]
+# それぞれのnameのリストに共通のものを抽出
+name_list = set(names_in_result) & set(names_in_info)
 
 # グラフを描画
 st.title('問題集の実施状況')
-# st.dataframe(df)
+with st.expander('data'):
+    st.dataframe(df)
 st.bar_chart(df, x='date', y=name_list)
 
 # 問題集の情報を用いて実施率を計算
 labels = []
-for i in range(len(info)):
+for name in name_list:
     # 問題集の情報を取得
-    name = info[i]['name']
-    total = info[i]['amount']
+    total = 0
+    for i in range(len(info)):
+        if info[i]['name'] == name:
+            total = info[i]['amount']
+    # 問題集の情報に問題数が記載されていなければスキップ
+    if total <= 0:
+        continue
 
     # 実施率を計算
     # 累計和を計算
@@ -54,5 +64,6 @@ for i in range(len(info)):
 
 # グラフを描画
 st.title('問題集の実施率')
-# st.dataframe(df)
+with st.expander('data'):
+    st.dataframe(df)
 st.line_chart(df, x='date', y=labels)

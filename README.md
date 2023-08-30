@@ -36,3 +36,14 @@ pip install streamlit
     }
 ]
 ```
+
+## コミット履歴について
+
+以下のプレフィックスを利用。  
+
+- fix:
+- feat:
+- docs:
+- style:
+- refactor:
+- test:
